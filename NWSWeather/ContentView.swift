@@ -9,8 +9,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var model = Model()
+    
     var body: some View {
-        Text("Hello, World!")
+        NavigationView {
+            List {
+                Text("Office: \(model.point.office)")
+                Text("GridX: \(model.point.gridX)")
+                Text("GridY: \(model.point.gridY)")
+                
+                Spacer()
+            }
+            .navigationTitle("Point Metadata")
+            .onAppear(perform: loadData)
+        }
+    }
+    
+    func loadData() {
+        model.loadPointMetadata()
     }
 }
 

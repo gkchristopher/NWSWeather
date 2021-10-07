@@ -13,6 +13,9 @@
 		83B3269D245B5808002FB0B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83B3269C245B5808002FB0B3 /* Assets.xcassets */; };
 		83B326A0245B5808002FB0B3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83B3269F245B5808002FB0B3 /* Preview Assets.xcassets */; };
 		83B326A3245B5808002FB0B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83B326A1245B5808002FB0B3 /* LaunchScreen.storyboard */; };
+		83B326AB245B5831002FB0B3 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B326AA245B5831002FB0B3 /* Model.swift */; };
+		83B326AD245B5B1E002FB0B3 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B326AC245B5B1E002FB0B3 /* Point.swift */; };
+		83B326AF245B6028002FB0B3 /* NWSWeatherApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B326AE245B6028002FB0B3 /* NWSWeatherApi.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		83B3269F245B5808002FB0B3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		83B326A2245B5808002FB0B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		83B326A4245B5808002FB0B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83B326AA245B5831002FB0B3 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		83B326AC245B5B1E002FB0B3 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		83B326AE245B6028002FB0B3 /* NWSWeatherApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NWSWeatherApi.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,9 @@
 				83B326A1245B5808002FB0B3 /* LaunchScreen.storyboard */,
 				83B326A4245B5808002FB0B3 /* Info.plist */,
 				83B3269E245B5808002FB0B3 /* Preview Content */,
+				83B326AA245B5831002FB0B3 /* Model.swift */,
+				83B326AC245B5B1E002FB0B3 /* Point.swift */,
+				83B326AE245B6028002FB0B3 /* NWSWeatherApi.swift */,
 			);
 			path = NWSWeather;
 			sourceTree = "<group>";
@@ -149,6 +158,9 @@
 				83B32697245B5807002FB0B3 /* AppDelegate.swift in Sources */,
 				83B32699245B5807002FB0B3 /* SceneDelegate.swift in Sources */,
 				83B3269B245B5807002FB0B3 /* ContentView.swift in Sources */,
+				83B326AB245B5831002FB0B3 /* Model.swift in Sources */,
+				83B326AF245B6028002FB0B3 /* NWSWeatherApi.swift in Sources */,
+				83B326AD245B5B1E002FB0B3 /* Point.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +228,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -270,7 +282,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
