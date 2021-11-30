@@ -18,6 +18,7 @@ struct Theme {
     let red = Color("Red")
     let orange = Color("Orange")
     let cyan = Color("Cyan")
+    let secondaryText = Color.secondary
     
     func color(for temperature: Int) -> Color {
         switch temperature {

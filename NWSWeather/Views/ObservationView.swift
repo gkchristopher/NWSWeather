@@ -16,15 +16,25 @@ struct ObservationView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(observation.textDescription)
-                .font(.headline)
+                .font(.title)
                 .foregroundColor(.theme.green)
             if let temp = observation.temperature.value {
-                Text(UnitsHelper.convertCtoF(temp).roundedString + "°")
-                    .font(.largeTitle)
+                HStack {
+                    Image(systemName: "thermometer")
+                        .foregroundColor(.theme.secondaryText)
+                    Text(UnitsHelper.convertCtoF(temp).roundedString + "°")
+                        .font(.largeTitle)
+                }
             }
             if let wind = observation.windSpeed.value, let direction = observation.windDirection.value {
-                Text("Wind: " + UnitsHelper.convertKilometersToMiles(wind).roundedString +
-                     " " + DirectionsHelper.cardinalDirection(for: direction))
+                HStack {
+                    Image(systemName: "wind")
+                        .foregroundColor(.theme.secondaryText)
+                    Text(UnitsHelper.convertKilometersToMiles(wind).roundedString)
+                    Image(systemName: "arrow.up")
+                        .rotationEffect(Angle(degrees: direction + 180))
+                        .animation(.easeInOut, value: direction)
+                }
             }
             Text("Current conditions at " + station.name + " (\(station.stationIdentifier))")
                 .font(.caption)

@@ -41,12 +41,12 @@ struct HomeView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Image(systemName: "goforward")
                         .onTapGesture {
-                            vm.startUpdates()
+                            vm.onAppear()
                         }
                 }
             })
             .onAppear {
-                vm.startUpdates()
+                vm.onAppear()
             }
         }
     }

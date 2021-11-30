@@ -24,7 +24,7 @@ class HomeViewModel: ObservableObject {
         subscribeObservation()
     }
     
-    func startUpdates() {
+    func onAppear() {
         weatherService.startUpdates()
     }
     

@@ -14,7 +14,7 @@ struct PointMetadataView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("City: \(point.relativeLocation.properties.city), \(point.relativeLocation.properties.state)")
+            Text("\(point.relativeLocation.properties.city), \(point.relativeLocation.properties.state)")
                 .font(.headline)
                 .foregroundColor(.theme.green)
             Text("Office: \(point.cwa)")

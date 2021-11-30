@@ -12,18 +12,24 @@ struct Period: Identifiable, Decodable {
     let id: Int
     let name: String
     let temperature: Int
+    let temperatureTrend: String?
     let shortForecast: String
     let detailedForecast: String
-    
-    static var emptyPeriod: Period = {
-        Period(id: 1, name: "None", temperature: 0, shortForecast: "No forecast", detailedForecast: "No forecast")
-    }()
+    let windDirection: String
+    let windSpeed: String
+    let icon: String
+    let isDaytime: Bool
     
     enum CodingKeys: String, CodingKey {
         case id = "number"
         case name
         case temperature
+        case temperatureTrend
         case shortForecast
         case detailedForecast
+        case windDirection
+        case windSpeed
+        case icon
+        case isDaytime
     }
 }

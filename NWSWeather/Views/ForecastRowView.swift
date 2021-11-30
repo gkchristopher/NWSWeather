@@ -13,12 +13,14 @@ struct ForecastRowView: View {
     let period: Period
     
     var body: some View {
-        HStack(spacing: 6) {
+        HStack(alignment: .top, spacing: 8) {
+            IconImageView(urlString: period.icon)
+                .frame(width: 50, height: 50)
             VStack(alignment: .leading, spacing: 4) {
                 Text(period.name)
                     .font(.headline)
                     .foregroundColor(.theme.green)
-                Text(period.detailedForecast)
+                Text(period.shortForecast)
             }
             Spacer()
             Text("\(period.temperature)°")

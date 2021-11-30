@@ -31,6 +31,6 @@ class DeveloperPreview {
                                   windSpeed: ObservationUnit(unitCode: "kph", value: 12),
                                   windDirection: ObservationUnit(unitCode: "angle", value: 20))
     
-    let period1 = Period(id: 1, name: "Tonight", temperature: 32, shortForecast: "Clear", detailedForecast: "Clear skies!!")
-    let period2 = Period(id: 2, name: "Today", temperature: 99, shortForecast: "Hot", detailedForecast: "Head for the AC")
+    let period1 = Period(id: 1, name: "Tonight", temperature: 32, temperatureTrend: nil, shortForecast: "Clear", detailedForecast: "Clear skies!!", windDirection: "N", windSpeed: "5 mph", icon: "https://api.weather.gov/icons/land/day/skc", isDaytime: true)
+    let period2 = Period(id: 2, name: "Today", temperature: 99, temperatureTrend: nil, shortForecast: "Hot", detailedForecast: "Head for the AC", windDirection: "N", windSpeed: "5 mph", icon: "https://api.weather.gov/icons/land/day/skc", isDaytime: true)
 }
