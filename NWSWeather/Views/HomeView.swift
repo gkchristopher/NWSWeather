@@ -17,31 +17,20 @@ struct HomeView: View {
             List {
                 Section(header: Text("Point metadata")) {
                     if let point = vm.point {
-                        Text("\(point.relativeLocation.properties.city), \(point.relativeLocation.properties.state)")
-                        Text("Office: \(point.cwa)")
-                        Text("GridX: \(point.gridX)")
-                        Text("GridY: \(point.gridY)")
+                        PointMetadataView(point: point)
+                    }
+                }
+                
+                Section(header: Text("Observation")) {
+                    if let obs = vm.observation, let station = vm.station {
+                        ObservationView(observation: obs, station: station)
                     }
                 }
                 
                 Section(header: Text("Forecast")) {
                     if let forecast = vm.forecast {
                         ForEach(forecast.periods) { period in
-                            VStack(alignment: .leading, spacing: 4) {
-                                HStack {
-                                    Text(period.name)
-                                        .font(.headline)
-                                    Spacer()
-                                    Text("\(period.temperature)°")
-                                        .font(.headline)
-                                        .foregroundColor(.theme.blue)
-                                }
-                                Text(period.shortForecast)
-                                    .foregroundColor(.theme.green)
-                                Text(period.detailedForecast)
-                                    .font(.caption)
-                                    .foregroundColor(.theme.green)
-                            }
+                            ForecastRowView(period: period)
                         }
                     }
                 }
@@ -67,26 +56,6 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
             .environmentObject(HomeViewModel())
+            .preferredColorScheme(.dark)
     }
 }
-
-//extension HomeView {
-//
-//    private var forecastRowView: some View {
-//        VStack(alignment: .leading, spacing: 4) {
-//            HStack {
-//                Text(period.name)
-//                    .font(.headline)
-//                Spacer()
-//                Text("\(period.temperature)°")
-//                    .font(.headline)
-//                    .foregroundColor(.theme.blue)
-//            }
-//            Text(period.shortForecast)
-//                .foregroundColor(.theme.green)
-//            Text(period.detailedForecast)
-//                .font(.caption)
-//                .foregroundColor(.theme.green)
-//        }
-//    }
-//}

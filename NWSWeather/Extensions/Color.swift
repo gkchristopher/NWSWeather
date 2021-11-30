@@ -15,4 +15,22 @@ extension Color {
 struct Theme {
     let green = Color("Green")
     let blue = Color("Blue")
+    let red = Color("Red")
+    let orange = Color("Orange")
+    let cyan = Color("Cyan")
+    
+    func color(for temperature: Int) -> Color {
+        switch temperature {
+        case 80...:
+            return red
+        case 65...:
+            return orange
+        case 50...:
+            return Color.yellow
+        case 40...:
+            return blue
+        default:
+            return cyan
+        }
+    }
 }

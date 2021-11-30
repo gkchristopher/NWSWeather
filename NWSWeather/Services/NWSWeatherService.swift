@@ -14,11 +14,11 @@ class NWSWeatherService {
     
     @Published var point: Point?
     @Published var forecast: Forecast?
+    @Published var observation: Observation?
+    @Published var observationStation: ObservationStation?
     
     private let locationManager = LocationManager()
-    private var pointSubscription: AnyCancellable?
-    private var forecastSubscription: AnyCancellable?
-    private var locationSubscription: AnyCancellable?
+    private var timer: Timer?
     private var cancellables = Set<AnyCancellable>()
     
     private static let baseUrl = "https://api.weather.gov/"
@@ -28,7 +28,11 @@ class NWSWeatherService {
     }
     
     func startUpdates() {
-        locationManager.requestLocation()
+        if locationManager.location == nil {
+            locationManager.requestLocation()
+        } else if let point = point {
+            getForecast(for: point)
+        }
     }
     
     func addSubscribers() {
@@ -53,25 +57,54 @@ class NWSWeatherService {
             .decode(type: PointProperties.self, decoder: JSONDecoder())
             .sink(receiveCompletion: NetworkingManager.handleCompletion,
                   receiveValue: { [weak self] pointProperties in
-                self?.point = pointProperties.properties
-                self?.getForecast(for: pointProperties.properties)
+                guard let self = self else { return }
+                self.point = pointProperties.properties
+                self.getForecast(for: pointProperties.properties)
+                self.getObservationStations(urlString: pointProperties.properties.observationStations)
             })
             .store(in: &cancellables)
     }
     
     func getForecast(for point: Point) {
-        guard var url = URL(string: NWSWeatherService.baseUrl) else { return }
+        guard let url = URL(string: point.forecast) else { return }
         
-        url.appendPathComponent("gridpoints")
-        url.appendPathComponent(point.cwa)
-        url.appendPathComponent("\(point.gridX),\(point.gridY)")
-        url.appendPathComponent("forecast")
+        timer?.invalidate()
         
         NetworkingManager.download(url: url)
-            .decode(type: Forecast.self, decoder: JSONDecoder())
+            .decode(type: ForecastProperties.self, decoder: JSONDecoder())
             .sink(receiveCompletion: NetworkingManager.handleCompletion,
-                  receiveValue: { [weak self] forecast in
-                self?.forecast = forecast
+                  receiveValue: { [weak self] value in
+                self?.forecast = value.properties
+                self?.timer = Timer.scheduledTimer(withTimeInterval: 60.0 * 5, repeats: true) { _ in
+                    self?.getForecast(for: point)
+                }
+            })
+            .store(in: &cancellables)
+    }
+    
+    func getObservationStations(urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        
+        NetworkingManager.download(url: url)
+            .decode(type: ObservationStationResponse.self, decoder: JSONDecoder())
+            .sink(receiveCompletion: NetworkingManager.handleCompletion,
+                  receiveValue: { [weak self] stations in
+                if let station = stations.features.first {
+                    self?.observationStation = station.properties
+                    self?.getObservation(for: station.properties.stationIdentifier)
+                }
+            })
+            .store(in: &cancellables)
+    }
+    
+    func getObservation(for stationID: String) {
+        guard let url = URL(string: "https://api.weather.gov/stations/\(stationID)/observations/latest") else { return }
+        
+        NetworkingManager.download(url: url)
+            .decode(type: ObservationProperties.self, decoder: JSONDecoder())
+            .sink(receiveCompletion: NetworkingManager.handleCompletion,
+                  receiveValue: { [weak self] value in
+                self?.observation = value.properties
             })
             .store(in: &cancellables)
     }

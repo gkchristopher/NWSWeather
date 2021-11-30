@@ -18,6 +18,7 @@ struct Point: Decodable {
     let gridY: Int
     let relativeLocation: RelativeLocationProperties
     let forecast: String
+    let observationStations: String
 }
 
 struct RelativeLocationProperties: Decodable {
