@@ -8,25 +8,13 @@
 
 import Foundation
 
-struct Forecast {
-    var periods: [Period]
-    
-    enum CodingKeys: String, CodingKey {
-        case properties
-    }
-    
-    enum PropertiesKeys: String, CodingKey {
-        case periods
-    }
+struct ForecastProperties: Decodable {
+    let properties: Forecast
 }
 
-extension Forecast: Decodable {
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        let properties = try container.nestedContainer(keyedBy: PropertiesKeys.self, forKey: .properties)
-        periods = try properties.decode([Period].self, forKey: .periods)
-    }
+struct Forecast: Decodable {
+    let updated: String
+    let periods: [Period]
 }
 
 
