@@ -10,8 +10,8 @@ struct IconImageView: View {
     
     @StateObject var vm: IconImageViewModel
     
-    init(urlString: String) {
-        _vm = StateObject(wrappedValue: IconImageViewModel(urlString: urlString))
+    init(urlString: String, iconName: String) {
+        _vm = StateObject(wrappedValue: IconImageViewModel(urlString: urlString, iconName: iconName))
     }
     
     var body: some View {
@@ -32,7 +32,7 @@ struct IconImageView: View {
 
 struct CoinImageView_Previews: PreviewProvider {
     static var previews: some View {
-        IconImageView(urlString: dev.period1.icon)
+        IconImageView(urlString: dev.period1.icon, iconName: dev.period1.iconImageName)
             .padding()
             .previewLayout(.sizeThatFits)
     }

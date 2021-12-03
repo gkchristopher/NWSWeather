@@ -32,4 +32,12 @@ struct Period: Identifiable, Decodable {
         case icon
         case isDaytime
     }
+    
+    // https://api.weather.gov/icons/land/day/sct?size=medium
+    
+    var iconImageName: String {
+        var name = icon.dropFirst(30)
+        name = name.dropLast(12)
+        return name.replacingOccurrences(of: "/", with: "_")
+    }
 }

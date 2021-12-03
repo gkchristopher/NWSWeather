@@ -14,12 +14,14 @@ class IconImageViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     
     private let urlString: String
+    private let iconName: String
     private let dataService: IconImageService
     private var cancellables = Set<AnyCancellable>()
     
-    init(urlString: String) {
+    init(urlString: String, iconName: String) {
         self.urlString = urlString
-        self.dataService = IconImageService(urlString: urlString)
+        self.iconName = iconName
+        self.dataService = IconImageService(urlString: urlString, name: iconName)
         self.addSubscribers()
         self.isLoading = true
     }

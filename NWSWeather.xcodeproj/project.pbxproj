@@ -126,10 +126,10 @@
 		834956F8275A917300BB3164 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				834956F9275A917300BB3164 /* ObservationView.swift */,
 				834956FA275A917300BB3164 /* HomeView.swift */,
-				834956FB275A917300BB3164 /* ForecastRowView.swift */,
 				834956FC275A917300BB3164 /* PointMetadataView.swift */,
+				834956F9275A917300BB3164 /* ObservationView.swift */,
+				834956FB275A917300BB3164 /* ForecastRowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

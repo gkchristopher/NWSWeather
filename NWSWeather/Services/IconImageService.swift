@@ -15,16 +15,18 @@ class IconImageService {
     
     private var imageSubscription: AnyCancellable?
     private let iconURLString: String
+    private let iconName: String
     private let fileManager = LocalFileManager.instance
     private let folderName = "icon_images"
     
-    init(urlString: String) {
+    init(urlString: String, name: String) {
         self.iconURLString = urlString
+        self.iconName = name
         getIconImage()
     }
     
     private func getIconImage() {
-        if let savedImage = fileManager.image(for: iconURLString, folderName: folderName) {
+        if let savedImage = fileManager.image(for: iconName, folderName: folderName) {
             image = savedImage
         } else {
             downloadIconImage()
@@ -45,7 +47,7 @@ class IconImageService {
                 guard let self = self, let image = image else { return }
                 self.image = image
                 self.imageSubscription?.cancel()
-                self.fileManager.save(image: image, imageName: self.iconURLString, folderName: self.folderName)
+                self.fileManager.save(image: image, imageName: self.iconName, folderName: self.folderName)
             })
     }
 }

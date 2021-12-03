@@ -14,8 +14,8 @@ struct ForecastRowView: View {
     
     var body: some View {
         HStack {
-            IconImageView(urlString: period.icon)
-                .frame(height: 50)
+            IconImageView(urlString: period.icon, iconName: period.iconImageName)
+                .frame(height: 80)
             VStack(alignment: .leading, spacing: 4) {
                 Text(period.name)
                     .font(.headline)
