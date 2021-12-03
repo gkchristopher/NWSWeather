@@ -13,9 +13,9 @@ struct ForecastRowView: View {
     let period: Period
     
     var body: some View {
-        HStack(alignment: .top, spacing: 8) {
+        HStack {
             IconImageView(urlString: period.icon)
-                .frame(width: 50, height: 50)
+                .frame(height: 50)
             VStack(alignment: .leading, spacing: 4) {
                 Text(period.name)
                     .font(.headline)
@@ -23,9 +23,13 @@ struct ForecastRowView: View {
                 Text(period.shortForecast)
             }
             Spacer()
-            Text("\(period.temperature)°")
-                .font(.title)
-                .bold()
+            VStack(alignment: .trailing, spacing: 4) {
+                Text("\(period.temperature)°")
+                    .font(.title)
+                    .bold()
+                Text("\(period.windSpeed) \(period.windDirection)")
+                    .font(.caption)
+            }
         }
     }
 }

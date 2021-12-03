@@ -38,6 +38,9 @@ struct ObservationView: View {
             }
             Text("Current conditions at " + station.name + " (\(station.stationIdentifier))")
                 .font(.caption)
+            Text("Updated: " + observation.formattedTimestamp)
+                .font(.caption2)
+                .foregroundColor(.theme.secondaryText)
         }
     }
 }

@@ -29,7 +29,8 @@ class DeveloperPreview {
     let observation = Observation(textDescription: "Clear",
                                   temperature: ObservationUnit(unitCode: "C", value: 27),
                                   windSpeed: ObservationUnit(unitCode: "kph", value: 12),
-                                  windDirection: ObservationUnit(unitCode: "angle", value: 20))
+                                  windDirection: ObservationUnit(unitCode: "angle", value: 20),
+                                  timestamp: Date())
     
     let period1 = Period(id: 1, name: "Tonight", temperature: 32, temperatureTrend: nil, shortForecast: "Clear", detailedForecast: "Clear skies!!", windDirection: "N", windSpeed: "5 mph", icon: "https://api.weather.gov/icons/land/day/skc", isDaytime: true)
     let period2 = Period(id: 2, name: "Today", temperature: 99, temperatureTrend: nil, shortForecast: "Hot", detailedForecast: "Head for the AC", windDirection: "N", windSpeed: "5 mph", icon: "https://api.weather.gov/icons/land/day/skc", isDaytime: true)

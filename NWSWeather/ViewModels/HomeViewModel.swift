@@ -28,6 +28,10 @@ class HomeViewModel: ObservableObject {
         weatherService.startUpdates()
     }
     
+    func refreshData() {
+        weatherService.reloadData()
+    }
+    
     func subscribePointData() {
         weatherService.$point
             .sink(receiveValue: { [weak self] newPoint in

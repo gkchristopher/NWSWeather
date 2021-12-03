@@ -35,6 +35,11 @@ class NWSWeatherService {
         }
     }
     
+    func reloadData() {
+        guard let location = locationManager.location else { return }
+        getPoint(at: location)
+    }
+    
     func addSubscribers() {
         locationManager.$location
             .debounce(for: .seconds(0.2), scheduler: DispatchQueue.main)
@@ -85,8 +90,10 @@ class NWSWeatherService {
     func getObservationStations(urlString: String) {
         guard let url = URL(string: urlString) else { return }
         
+        let decoder = JSONDecoder()
+        
         NetworkingManager.download(url: url)
-            .decode(type: ObservationStationResponse.self, decoder: JSONDecoder())
+            .decode(type: ObservationStationResponse.self, decoder: decoder)
             .sink(receiveCompletion: NetworkingManager.handleCompletion,
                   receiveValue: { [weak self] stations in
                 if let station = stations.features.first {
@@ -100,8 +107,11 @@ class NWSWeatherService {
     func getObservation(for stationID: String) {
         guard let url = URL(string: "https://api.weather.gov/stations/\(stationID)/observations/latest") else { return }
         
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        
         NetworkingManager.download(url: url)
-            .decode(type: ObservationProperties.self, decoder: JSONDecoder())
+            .decode(type: ObservationProperties.self, decoder: decoder)
             .sink(receiveCompletion: NetworkingManager.handleCompletion,
                   receiveValue: { [weak self] value in
                 self?.observation = value.properties
