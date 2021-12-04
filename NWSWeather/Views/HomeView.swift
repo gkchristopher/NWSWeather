@@ -12,37 +12,44 @@ struct HomeView: View {
     
     @EnvironmentObject var vm: HomeViewModel
     
+    let columns = [GridItem(.adaptive(minimum: 120)), GridItem(.adaptive(minimum: 120))]
+    
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("Point metadata")) {
-                    if let point = vm.point {
-                        PointMetadataView(point: point)
-                    }
-                }
-                
-                Section(header: Text("Observation")) {
+                Section {
                     if let obs = vm.observation, let station = vm.station {
                         ObservationView(observation: obs, station: station)
                     }
                 }
                 
-                Section(header: Text("Forecast")) {
-                    if let forecast = vm.forecast {
-                        ForEach(forecast.periods) { period in
-                            ForecastRowView(period: period)
+                Section {
+                    if let tonight = vm.tonightPeriod {
+                        ForecastRowView(period: tonight)
+                    }
+                    if let periods = vm.displayPeriods {
+                        LazyVGrid(columns: columns, alignment: .leading, spacing: 20) {
+                            ForEach(periods) { period in
+                                CompactForecastRowView(period: period, width: 150)
+//                                    .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 10))
+                            }
                         }
                     }
                 }
             }
             .listStyle(GroupedListStyle())
-            .navigationTitle("NWS Weather API")
+            .navigationTitle(vm.title)
+            .navigationBarHidden(false)
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Image(systemName: "goforward")
+                    Image(systemName: "arrow.clockwise.circle")
+                        .padding()
                         .onTapGesture {
-                            vm.refreshData()
+                            withAnimation(.linear(duration: 2.0)) {
+                                vm.refreshData()
+                            }
                         }
+                        .rotationEffect(Angle(degrees: vm.isLoading ? 360 : 0))
                 }
             })
             .onAppear {
@@ -55,7 +62,7 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
-            .environmentObject(HomeViewModel())
+            .environmentObject(dev.vm)
             .preferredColorScheme(.dark)
     }
 }

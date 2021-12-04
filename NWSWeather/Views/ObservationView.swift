@@ -15,6 +15,8 @@ struct ObservationView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
+            Text("Current conditions at " + station.name + " (\(station.stationIdentifier))")
+                .font(.caption)
             Text(observation.textDescription)
                 .font(.title)
                 .foregroundColor(.theme.green)
@@ -36,8 +38,6 @@ struct ObservationView: View {
                         .animation(.easeInOut, value: direction)
                 }
             }
-            Text("Current conditions at " + station.name + " (\(station.stationIdentifier))")
-                .font(.caption)
             Text("Updated: " + observation.formattedTimestamp)
                 .font(.caption2)
                 .foregroundColor(.theme.secondaryText)

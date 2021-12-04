@@ -13,23 +13,23 @@ struct ForecastRowView: View {
     let period: Period
     
     var body: some View {
-        HStack {
-            IconImageView(urlString: period.icon, iconName: period.iconImageName)
-                .frame(height: 80)
-            VStack(alignment: .leading, spacing: 4) {
-                Text(period.name)
-                    .font(.headline)
-                    .foregroundColor(.theme.green)
+        VStack(alignment: .leading, spacing: 4) {
+            Text(period.name)
+                .font(.headline)
+                .foregroundColor(.theme.green)
+            HStack(alignment: .top) {
+                IconImageView(urlString: period.icon, iconName: period.iconImageName)
+                    .frame(width: 150, height: 150)
                 Text(period.shortForecast)
+                Spacer()
+                VStack(alignment: .trailing, spacing: 4) {
+                    Text("\(period.temperature)°")
+                        .font(.title)
+                        .bold()
+                }
             }
-            Spacer()
-            VStack(alignment: .trailing, spacing: 4) {
-                Text("\(period.temperature)°")
-                    .font(.title)
-                    .bold()
-                Text("\(period.windSpeed) \(period.windDirection)")
-                    .font(.caption)
-            }
+            Text("\(period.windSpeed) \(period.windDirection)")
+                .font(.caption)
         }
     }
 }

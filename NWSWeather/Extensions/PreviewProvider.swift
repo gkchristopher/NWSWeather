@@ -21,9 +21,16 @@ class DeveloperPreview {
     
     private init() {}
     
-    let vm = HomeViewModel()
+    lazy var vm: HomeViewModel = {
+        let viewModel = HomeViewModel()
+        viewModel.point = point
+        viewModel.station = station
+        viewModel.observation = observation
+        viewModel.forecast = Forecast(updated: "yes", periods: [period1, period2])
+        return viewModel
+    }()
     
-    let point = Point(cwa: "ABC", gridX: 42, gridY: 69, relativeLocation: RelativeLocationProperties(properties: RelativeLocation(city: "Hometown", state: "USA")), forecast: "Clammy", observationStations: "KEYW")
+    let point = Point(cwa: "ABC", gridX: 42, gridY: 69, relativeLocation: RelativeLocationProperties(properties: RelativeLocation(city: "Key West", state: "FL")), forecast: "Clammy", observationStations: "KEYW")
     
     let station = ObservationStation(name: "Key West, FL", stationIdentifier: "KEYW")
     let observation = Observation(textDescription: "Clear",
@@ -32,6 +39,6 @@ class DeveloperPreview {
                                   windDirection: ObservationUnit(unitCode: "angle", value: 20),
                                   timestamp: Date())
     
-    let period1 = Period(id: 1, name: "Tonight", temperature: 32, temperatureTrend: nil, shortForecast: "Clear", detailedForecast: "Clear skies!!", windDirection: "N", windSpeed: "5 mph", icon: "https://api.weather.gov/icons/land/day/skc", isDaytime: true)
-    let period2 = Period(id: 2, name: "Today", temperature: 99, temperatureTrend: nil, shortForecast: "Hot", detailedForecast: "Head for the AC", windDirection: "N", windSpeed: "5 mph", icon: "https://api.weather.gov/icons/land/day/skc", isDaytime: true)
+    let period1 = Period(id: 1, name: "Today", temperature: 99, temperatureTrend: nil, shortForecast: "Hot", detailedForecast: "Head for the AC", windDirection: "N", windSpeed: "5 mph", icon: "https://api.weather.gov/icons/land/day/skc", isDaytime: true)
+    let period2 = Period(id: 2, name: "Tonight", temperature: 32, temperatureTrend: nil, shortForecast: "Clear", detailedForecast: "Clear skies!!", windDirection: "N", windSpeed: "5 mph", icon: "https://api.weather.gov/icons/land/day/skc", isDaytime: false)
 }
